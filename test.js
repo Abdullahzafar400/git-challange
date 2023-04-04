@@ -15,6 +15,15 @@ tape('should respond hello', (t) => {
   })
 })
 
+tape('should respond base64 of hello', (t) => {
+  jsonist.get(`${urlBase}/base64`, (err, body) => {
+    if (err) t.error(err)
+
+    t.equal(body.msg, Buffer.from("hello").toString('base64'))
+    t.end()
+  })
+})
+
 tape('cleanup', function (t) {
   server.close()
   t.end()
